@@ -20,10 +20,8 @@ const PORT = process.env.PORT || 5000;
  
 // Middleware
 app.use(cors({
-    origin: true, // Allow all origins temporarily for debugging
-    credentials: true,
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization', 'stripe-signature']
+    credentials:true,
+    origin:process.env.CLIENT_URL
 }));
 
 // Special middleware for Stripe webhook - needs raw body
@@ -41,7 +39,7 @@ app.use((req, res, next) => {
 });
 
 // Database connection
-const mongoUri = process.env.MONGODB_URI || 'mongodb+srv://gowthamvetriii:gowtham77@cluster0.dkjonuu.mongodb.net/evaltree?retryWrites=true&w=majority&appName=Cluster0';
+const mongoUri = process.env.MONGODB_URI;
 mongoose.connect(mongoUri, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
